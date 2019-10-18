@@ -1,6 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+
+from .models import BlogPost
 
 
-def index(request):
-    return HttpResponse("Hello from 'main'.")
+class IndexView(generic.ListView):
+    template_name = 'main/list.html'
+
+    def get_queryset(self):
+        return BlogPost.objects.all()
+
+
+class DetailView(generic.DetailView):
+    model = BlogPost
+    template_name = 'main/detail.html'
