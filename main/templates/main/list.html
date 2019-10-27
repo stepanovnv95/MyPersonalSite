@@ -1,9 +1,12 @@
 {% if blogpost_list %}
-    <ul>
-        {% for post in blogpost_list %}
-            <li><a href="{% url 'main:detail' post.id %}">{{ post.title }}</a></li>
-        {% endfor %}
-    </ul>
+    {% for post in blogpost_list %}
+        <div>
+            <p><b>Title: {{ post.title }}</b></p>
+            <p>Date: {{ post.publish_date }}</p>
+            <a href="{% url 'main:detail' post.id %}">Link</a>
+        </div>
+        <br><br>
+    {% endfor %}
 {% else %}
     <p>No posts are available.</p>
 {% endif %}
