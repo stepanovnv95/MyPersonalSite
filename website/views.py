@@ -4,7 +4,7 @@ from .models import BlogPost
 
 
 class IndexView(generic.ListView):
-    template_name = 'main/list.html'
+    template_name = 'website/list.html'
 
     def get_queryset(self):
         return BlogPost.objects.all()
@@ -12,4 +12,4 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = BlogPost
-    template_name = 'main/detail.html'
+    template_name = 'website/detail.html'

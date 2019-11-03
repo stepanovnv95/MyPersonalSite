@@ -3,7 +3,7 @@
         <div>
             <p><b>Title: {{ post.title }}</b></p>
             <p>Date: {{ post.publish_date }}</p>
-            <a href="{% url 'main:detail' post.id %}">Link</a>
+            <a href="{% url 'website:detail' post.id %}">Link</a>
         </div>
         <br><br>
     {% endfor %}
