@@ -4,7 +4,7 @@ from .models import BlogPost
 
 
 class IndexView(generic.ListView):
-    template_name = 'website/list.html'
+    template_name = 'website/index.html'
 
     def get_queryset(self):
         return BlogPost.objects.all()
