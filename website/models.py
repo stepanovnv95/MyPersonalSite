@@ -48,6 +48,6 @@ class BlogPost(models.Model):
 
 
 # noinspection PyUnusedLocal
-@receiver(models.signals.post_delete)
-def auto_delete_media_directory(instance, **kwargs):
+@receiver(models.signals.post_delete, sender=BlogPost)
+def auto_delete_media_directory(sender, instance, **kwargs):
     shutil.rmtree(path.join(settings.MEDIA_ROOT, instance.media_directory))
