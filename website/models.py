@@ -13,7 +13,7 @@ def generate_media_directory_name(name_size=35):
     :return: Unique string name
     """
     date_part = re.sub('[- :.]', '_', str(timezone.make_naive(timezone.now())))
-    assert len(date_part) + 2 >= name_size
+    assert len(date_part) + 2 <= name_size
     letters = string.ascii_lowercase
     random_part = ''.join(random.choice(letters) for _ in range(name_size - len(date_part) - 1))
     return date_part + '_' + random_part
