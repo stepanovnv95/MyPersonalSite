@@ -28,6 +28,6 @@ const build = series(clean, templates);
 
 exports.clean = clean;
 exports.build = build;
-exports.watch = series( () => {
-  watch(`${PATHS.src}/**/*.*`, { events: 'all' }, build)
+exports.watch = series(build, () => {
+  watch(`${PATHS.src}/**/*.*`, { events: 'all' })
 });
