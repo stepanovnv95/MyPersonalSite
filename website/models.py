@@ -7,7 +7,9 @@ from os import path
 import shutil
 
 
-# Blog Post #
+#################################################
+#                  Blog Post                    #
+#################################################
 
 def generate_media_directory_name():
     """
@@ -32,11 +34,14 @@ def get_preview_image_upload_path(instance, filename):
 
 class BlogPost(models.Model):
     title = models.TextField()
-    text = models.TextField()
-    publish_date = models.DateTimeField(default=timezone.now, editable=False)
+    text = models.TextField(blank=True)
+    publish_date = models.DateTimeField(default=timezone.now,
+                                        editable=False)
 
-    media_directory = models.CharField(max_length=35, editable=False, default=generate_media_directory_name)
-    preview_image = models.ImageField(upload_to=get_preview_image_upload_path, null=True)
+    media_directory = models.CharField(max_length=35, default=generate_media_directory_name,
+                                       editable=False)
+    preview_image = models.ImageField(upload_to=get_preview_image_upload_path,
+                                      blank=True, null=True)
 
     def __str__(self):
         return self.title

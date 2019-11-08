@@ -9,7 +9,9 @@
 <p><b>Title: {{ blogpost.title }}</b></p>
 <p>{{ blogpost.text }}</p>
 <p>Date: {{ blogpost.publish_date }}</p>
-<img src="{{ blogpost.preview_image.url }}" alt="Preview image">
+{% if blogpost.preview_image %}
+    <img src="{{ blogpost.preview_image.url }}" alt="Preview image">
+{% endif %}
 
 </body>
 </html>
