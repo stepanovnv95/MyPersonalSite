@@ -4,10 +4,10 @@ from .models import BlogPost
 
 
 class IndexView(generic.ListView):
+    model = BlogPost
     template_name = 'website/index.html'
-
-    def get_queryset(self):
-        return BlogPost.objects.all()
+    ordering = ['-publish_date']
+    paginate_by = 12
 
 
 class DetailView(generic.DetailView):
