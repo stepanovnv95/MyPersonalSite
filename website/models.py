@@ -1,22 +1,29 @@
 from django.db import models
 from django.utils import timezone
+from django.dispatch import receiver
+from django.conf import settings
 import re
-import string
-import random
 from os import path
+import shutil
 
 
-def generate_media_directory_name(name_size=35):
+# Blog Post #
+
+def generate_media_directory_name():
     """
-    Return an unique media directory name. It contains date and random parts.
-    :param name_size: Must be greater or equal then 28
-    :return: Unique string name
+    Return an unique media directory name.
     """
-    date_part = re.sub('[- :.]', '_', str(timezone.make_naive(timezone.now())))
-    assert len(date_part) + 2 <= name_size
-    letters = string.ascii_lowercase
-    random_part = ''.join(random.choice(letters) for _ in range(name_size - len(date_part) - 1))
-    return date_part + '_' + random_part
+    date_part = re.sub('[ :.]', '-', str(timezone.make_naive(timezone.now())))[:19]
+    if date_part == generate_media_directory_name.last_date_part:
+        generate_media_directory_name.last_index += 1
+        return date_part + '_' + str(generate_media_directory_name.last_index)
+    else:
+        generate_media_directory_name.last_date_part = date_part
+        generate_media_directory_name.last_index = 0
+        return date_part
+
+generate_media_directory_name.last_date_part = ''
+generate_media_directory_name.last_index = 0
 
 
 def get_preview_image_upload_path(instance, filename):
@@ -33,3 +40,9 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# noinspection PyUnusedLocal
+@receiver(models.signals.post_delete)
+def auto_delete_media_directory(instance, **kwargs):
+    shutil.rmtree(path.join(settings.MEDIA_ROOT, instance.media_directory))
