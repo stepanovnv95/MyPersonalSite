@@ -1,37 +1,14 @@
 'use strict';
 
-const { src, dest, series, watch } = require('gulp');
-const del = require('delete');
-const flatten = require('gulp-flatten');
+const gulp = require('gulp');
+const PATHS = require('./tasks/config');
 
 
-const PATHS = {
-  src: './frontend',
-  templates: './templates/website'
-};
+const clean = require('./tasks/clean')([PATHS.templates_root, PATHS.static_root]);
+gulp.task('clean', clean);
 
 
-function clean(cb) {
-  del([PATHS.templates], cb);
-}
-
-
-function templates(){
-  return src(`${PATHS.src}/**/*.html`)
-    .pipe(flatten())
-    .pipe(dest(PATHS.templates))
-}
-
-
-const build = series(clean, templates);
-
-
-exports.clean = clean;
-exports.build = build;
-exports.watch = function () {
-  build();
-  watch(
-    `${PATHS.src}/**/*.*`, { events: 'all' },
-    build
-  );
-};
+const templates = require('./tasks/templates')(PATHS.templates, PATHS.manifest);
+const styles = require('./tasks/styles')(PATHS.styles, PATHS.manifest);
+const images = require('./tasks/images')(PATHS.images, PATHS.manifest);
+gulp.task('build', gulp.series(clean, images, styles, templates));
