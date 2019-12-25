@@ -32,7 +32,15 @@ npm install
 gulp build
 ```
 
-## Run develop server
+## Development commands
+
+### Run develop server
 ```
 python manage.py runserver
+```
+
+### Start watching frontend changes
+ ```
+cd website
+gulp watch
 ```
