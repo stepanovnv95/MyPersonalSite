@@ -5,10 +5,13 @@ const filter = require('gulp-filter');
 const sass = require('gulp-sass');
 const rev = require('gulp-rev');
 const rev_replace = require('gulp-rev-replace');
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
 
 function make_styles(paths, manifest) {
   return function styles() {
     return gulp.src(paths.src, { base: paths.base })
+      .pipe( plumber({ errorHandler: notify.onError() }) )
       .pipe( filter(['**', '!**/_*.*']) )
       .pipe( sass() )
       .pipe( rev_replace({ manifest: gulp.src(manifest.path, { allowEmpty: true }) }) )
