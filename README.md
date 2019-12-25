@@ -37,10 +37,6 @@ gulp build
 ### Run develop server
 ```
 python manage.py runserver
-```
-
-### Start watching frontend changes
- ```
 cd website
-gulp watch
+gulp dev
 ```
