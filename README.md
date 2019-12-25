@@ -21,3 +21,17 @@
 1. Разработка системы тегов.
 1. Разработка системы локализации.
 1. Разработка системы комментирования.
+
+
+## Prepare project
+```
+pip install -f requirements.txt
+cd website
+npm install
+gulp build
+```
+
+## Run develop server
+```
+python manage.py runserver
+```
