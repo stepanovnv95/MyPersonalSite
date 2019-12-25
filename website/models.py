@@ -18,7 +18,7 @@ def generate_media_directory_name():
     date_part = re.sub('[ :.]', '-', str(timezone.make_naive(timezone.now())))[:19]
     if date_part == generate_media_directory_name.last_date_part:
         generate_media_directory_name.last_index += 1
-        return date_part + '_' + str(generate_media_directory_name.last_index)
+        return f'{date_part}_{str(generate_media_directory_name.last_index)}'
     else:
         generate_media_directory_name.last_date_part = date_part
         generate_media_directory_name.last_index = 0
