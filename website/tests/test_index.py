@@ -30,3 +30,5 @@ class IndexViewTests(TestCase):
         BlogPost.objects.create(title='Title')
         response = self.client.get(reverse('website:index'))
         self.assertNotContains(response, get_empty_library_template())
+
+    # TODO: Add tests for pagination
