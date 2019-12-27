@@ -4,13 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>List of Posts</title>
-    <link rel="stylesheet" href="{% static 'website/styles/style.css' %}">
 </head>
 <body>
-
-<%- include('_header.html'); %>
-
-<img src="{% static 'website/images/img.jpg' %}" alt="img">
 
 {% if is_paginated %}
     {% if page_obj.has_previous %}
@@ -35,8 +30,6 @@
 {% else %}
     <p>No posts are available.</p>
 {% endif %}
-
-<%- include('_footer.html'); %>
 
 </body>
 </html>
