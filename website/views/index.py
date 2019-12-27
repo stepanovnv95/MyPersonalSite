@@ -1,6 +1,6 @@
 from django.views import generic
 
-from .models import BlogPost
+from website.models import BlogPost
 
 
 class IndexView(generic.ListView):
@@ -8,8 +8,3 @@ class IndexView(generic.ListView):
     template_name = 'website/index.html'
     ordering = ['-publish_date']
     paginate_by = 12
-
-
-class DetailView(generic.DetailView):
-    model = BlogPost
-    template_name = 'website/detail.html'
