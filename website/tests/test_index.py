@@ -21,7 +21,7 @@ class IndexViewTests(TestCase):
         Empty index page should print the message that says about it
         """
         response = self.client.get(reverse('website:index'))
-        self.assertContains(response, get_empty_library_template())
+        self.assertTemplateUsed(response, "website/_empty_library.html")
 
     def test_not_empty_index(self):
         """
@@ -29,6 +29,6 @@ class IndexViewTests(TestCase):
         """
         BlogPost.objects.create(title='Title')
         response = self.client.get(reverse('website:index'))
-        self.assertNotContains(response, get_empty_library_template())
+        self.assertTemplateNotUsed(response, "website/_empty_library.html")
 
     # TODO: Add tests for pagination
