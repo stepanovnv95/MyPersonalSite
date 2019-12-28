@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail</title>
-</head>
-<body>
+{% extends "website/_base.html" %}
 
-<p><b>Title: {{ blogpost.title }}</b></p>
-<p>{{ blogpost.text }}</p>
-<p>Date: {{ blogpost.publish_date }}</p>
+{% block title %}Detail{% endblock %}
 
-</body>
-</html>
+{% block body %}
+    <p><b>Title: {{ blogpost.title }}</b></p>
+    <p>{{ blogpost.text }}</p>
+    <p>Date: {{ blogpost.publish_date }}</p>
+{% endblock body %}
