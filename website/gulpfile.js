@@ -30,6 +30,6 @@ function watch() {
   gulp.watch(PATHS.styles.src, gulp.series('build'));
   gulp.watch(PATHS.templates.src, gulp.series(templates))
 }
-gulp.task('watch', gulp.series(watch));
+gulp.task('watch', gulp.series('rebuild', watch));
 
 gulp.task('dev', gulp.series('rebuild', gulp.parallel('watch', 'serve')));
